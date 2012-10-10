@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings errorTracingEnabled="true"
+		statementCachingEnabled="true" 
+		useStatementNamespaces="true"
+		cacheModelsEnabled="true"
+		lazyLoadingEnabled="true"
+		enhancementEnabled="true" />
+
+	<typeAlias alias="base-map" type="cei.domains.BaseMap" />
+	<typeAlias alias="system-code" type="cei.domains.SystemCode" />
+	<typeAlias alias="system-file" type="cei.domains.SystemFile" />
+
+	<typeHandler javaType="java.lang.String" jdbcType="CLOB" callback="org.springframework.orm.ibatis.support.ClobStringTypeHandler" />
+	<typeHandler javaType="boolean" callback="cei.support.ibatis.type.YesNoBoolTypeHandlerCallback" />
+	
+	<sqlMap resource="system-query.cei.xml" />
+</sqlMapConfig>

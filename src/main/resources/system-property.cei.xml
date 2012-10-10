@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- Base -->
+	<entry key="base.charset">UTF-8</entry>
+
+	<!-- Database Account -->
+	<entry key="database.driver">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="database.opr.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+	<entry key="database.opr.username">TEST</entry>
+	<entry key="database.opr.password">TEST</entry>
+	<entry key="database.test.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+	<entry key="database.test.username">TEST</entry>
+	<entry key="database.test.password">TEST</entry>
+
+	<!-- JSTL View Resolver -->
+	<entry key="base.view.jstl.prefix">/WEB-INF/jsp/</entry>
+	<entry key="base.view.jstl.suffix">.jsp</entry>
+
+	<!-- Ibatis query map path -->
+	<entry key="ibatis.query.path">query</entry>
+
+
+	<entry key="file.storage.path">D:/storage/upload</entry>
+</properties>

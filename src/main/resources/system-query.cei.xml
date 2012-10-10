@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="system">
+	<resultMap id="code-map" class="system-code">
+		<result property="group"		column="GRP" />
+		<result property="code"			column="CD" />
+		<result property="parent"		column="PCD" />
+		<result property="value"		column="VAL" />
+		<result property="level"		column="LVL" />
+		<result property="order"		column="ORD" />
+		<result property="use"			column="USE" />
+		<result property="description"	column="DSC" />
+		<result property="annex"		column="ANN" />
+	</resultMap>
+
+	<resultMap id="file-map" class="system-file">
+		<result property="seq"			column="SEQ" />
+		<result property="orgName"		column="ORGNM" />
+		<result property="saveName"		column="SAVNM" />
+		<result property="path"			column="PATH" />
+		<result property="type"			column="TYPE" />
+		<result property="size"			column="LEN" />
+		<result property="access"		column="ACC" />
+		<result property="delete"		column="DEL" />
+	</resultMap>
+
+	<statement id="code-save">
+		MERGE INTO SYSCD
+		USING (SELECT 1 FROM DUAL)
+		ON (
+			GRP = #group#
+			AND CD = #code#
+		)
+		WHEN MATCHED THEN
+			UPDATE	SET
+					PCD = #parent#,
+					VAL = #value#,
+					ORD = #order#,
+					USE = #use#,
+					DSC = #description#,
+					ANN = #annex#
+		WHEN NOT MATCHED THEN
+			INSERT	(GRP, CD, PCD, VAL, ORD, DSC, ANN)
+			VALUES	(#group#,
+					#code#,
+					#parent#,
+					#value#,
+					#order#,
+					#description#,
+					#annex#)
+	</statement>
+	<update id="code-update">
+		UPDATE	SYSCD SET
+				USE = #use#
+		WHERE	GRP = #group#
+		AND		CD = #code#
+	</update>
+	<delete id="code-remove">
+		DELETE	FROM SYSCD
+		WHERE	GRP = #group#
+		AND		CD = #code#
+	</delete>
+	<select id="code-get" resultMap="code-map">
+		SELECT  GRP,
+		        CD,
+		        PCD,
+		        VAL,
+		        0 AS LVL,
+		        ORD,
+		        USE,
+		        DSC,
+		        ANN
+		FROM    SYSCD
+		WHERE   USE = NVL(#use#, USE)
+		AND     GRP = #group#
+		AND		CD = NVL(#code#, CD)
+		AND     PCD = NVL(#parent#, PCD)
+		ORDER   BY ORD
+	</select>
+
+
+
+	<select id="tree" resultMap="code-map"><![CDATA[
+		SELECT  LEVEL-1 AS LVL,
+				GRP,
+		        CD,
+		        PCD,
+		        VAL,
+		        ORD,
+		        USE,
+		        DSC,
+		        ANN
+		FROM    SYSCD
+		WHERE   USE = NVL(#use#, USE)
+		AND     GRP = #group#
+	    AND     LEVEL-1 <= DECODE(#level#, 0, 999, NULL, 999, #level#)
+    	START   WITH CD = #code# CONNECT BY PRIOR CD = PCD
+		ORDER   SIBLINGS BY ORD
+	]]></select>
+	
+
+
+	<insert id="file-save">
+		<selectKey keyProperty="seq" resultClass="int">SELECT SQ_SYSFD.NEXTVAL FROM DUAL</selectKey>
+
+		INSERT INTO SYSFD (SEQ, ORGNM, SAVNM, PATH, TYPE, LEN)
+		VALUES (#seq#,
+				#orgName#,
+				#saveName#,
+				#path#,
+				#type#,
+				#size#)
+	</insert>
+	<select id="file-bySeq" resultMap="file-map">
+		SELECT	SEQ,
+				ORGNM,
+				SAVNM,
+				PATH,
+				TYPE,
+				LEN,
+				ACC,
+				DEL
+		FROM	SYSFD
+		WHERE	SEQ = #seq#
+	</select>
+	<update id="file-garbage">
+		UPDATE	SYSFD SET
+				DEL = 'Y'
+		FROM	SEQ = #seq#
+	</update>
+	<update id="file-recycle">
+		UPDATE	SYSFD SET
+				DEL = 'N'
+		FROM	SEQ = #seq#
+	</update>
+	<delete id="file-remove">
+		DELETE	FROM SYSFD
+		WHERE	SEQ = #seq#
+	</delete>
+	<update id="file-access">
+		UPDATE	SYSFD SET
+				ACC = ACC + 1
+		WHERE	SEQ = #seq#
+	</update>
+</sqlMap>
