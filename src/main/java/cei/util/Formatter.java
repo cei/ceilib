@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import oracle.sql.CLOB;
+import java.sql.Clob;;
 
 /**
  * 기본적인 데이터 형태를 정의
@@ -72,13 +72,13 @@ public abstract class Formatter {
 		return items;
 	}
 	
-	public static String CLOB2String(CLOB data) {
+	public static String CLOB2String(Clob data) {
 		if(data == null) return "";
 
 		StringBuffer sb = new StringBuffer();
 		Reader reader = null;
 		char[] ch = new char[1024];
-		CLOB c = (CLOB)data;
+		Clob c = (Clob)data;
 
 		try {
 			reader = c.getCharacterStream();

@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import oracle.sql.CLOB;
+import java.sql.Clob;
 
 import cei.util.Formatter;
 
@@ -171,8 +171,8 @@ public class ConvertToJson {
 			if(use) json.deleteCharAt(json.length() - 1);
 			json.append("]");
 		}
-		else if(data instanceof CLOB) {
-			composit(Formatter.CLOB2String((CLOB)data), json);
+		else if(data instanceof Clob) {
+			composit(Formatter.CLOB2String((Clob)data), json);
 		}
 		else {
 			boolean use = false;

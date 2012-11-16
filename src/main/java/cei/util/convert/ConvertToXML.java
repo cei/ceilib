@@ -16,7 +16,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import oracle.sql.CLOB;
+import java.sql.Clob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -211,8 +211,8 @@ public class ConvertToXML {
 		else if(obj instanceof Date) {
 			addChildNode(parent, null, Long.toString(((Date)obj).getTime()));
 		}
-		else if(obj instanceof CLOB) {
-			addChildNode(parent, null, Formatter.CLOB2String((CLOB)obj), true);
+		else if(obj instanceof Clob) {
+			addChildNode(parent, null, Formatter.CLOB2String((Clob)obj), true);
 		}
 		else {
 			Class<?> clazz = obj.getClass();
