@@ -6,12 +6,12 @@
 
 	<!-- Database Account -->
 	<entry key="database.driver">oracle.jdbc.driver.OracleDriver</entry>
-	<entry key="database.opr.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
-	<entry key="database.opr.username">TEST</entry>
-	<entry key="database.opr.password">TEST</entry>
-	<entry key="database.test.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
-	<entry key="database.test.username">TEST</entry>
-	<entry key="database.test.password">TEST</entry>
+	<entry key="database.opr.url">jdbc:oracle:thin:@cheoeumin.com:1521:XE</entry>
+	<entry key="database.opr.username">MUDYO</entry>
+	<entry key="database.opr.password">MUDYO</entry>
+	<entry key="database.test.url">jdbc:oracle:thin:@cheoeumin.com:1521:XE</entry>
+	<entry key="database.test.username">MUDYO</entry>
+	<entry key="database.test.password">MUDYO</entry>
 
 	<!-- JSTL View Resolver -->
 	<entry key="base.view.jstl.prefix">/WEB-INF/jsp/</entry>
