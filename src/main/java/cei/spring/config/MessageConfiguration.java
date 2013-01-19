@@ -24,7 +24,7 @@ public class MessageConfiguration {
 		MessageSupport messageSource = new MessageSupport();
 
 		List<String> messages = new ArrayList<String>();
-		messages.add("classpath:system-message.cei");
+		messages.add("classpath:message.cei");
 
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
 		Resource[] resources = null;

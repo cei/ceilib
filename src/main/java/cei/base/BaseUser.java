@@ -1,4 +1,4 @@
-package cei.domains;
+package cei.base;
 
 public class BaseUser {
 	public static final String SESSION_NAME = "__user__";

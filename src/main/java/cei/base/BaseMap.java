@@ -1,4 +1,4 @@
-package cei.domains;
+package cei.base;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

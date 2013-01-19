@@ -23,7 +23,7 @@ public class PropertyConfiguration {
 
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
 		List<Resource> resourceList = new ArrayList<Resource>();
-		resourceList.add(ctx.getResource("classpath:system-property.cei.xml"));
+		resourceList.add(ctx.getResource("classpath:cei.property.xml"));
 
 		try {
 			resourceList.addAll(Arrays.asList(ctx.getResources("classpath:properties/**/*")));

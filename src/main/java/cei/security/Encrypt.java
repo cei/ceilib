@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Base64;
-import org.junit.Test;
 
 public class Encrypt {
 	public static String password(String data) {
@@ -23,10 +22,5 @@ public class Encrypt {
 		}
 
 		return new String(Base64.encodeBase64(hashValue));
-	}
-	
-	@Test
-	public void test() {
-		System.out.println(password("test"));
 	}
 }

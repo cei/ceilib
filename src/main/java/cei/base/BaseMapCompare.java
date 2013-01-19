@@ -1,8 +1,8 @@
-package cei.domains;
+package cei.base;
 
 import java.util.Comparator;
 
-import cei.domains.BaseMap;
+import cei.base.BaseMap;
 
 public class BaseMapCompare implements Comparator<BaseMap> {
 

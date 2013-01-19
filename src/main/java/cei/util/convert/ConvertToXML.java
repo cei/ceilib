@@ -28,7 +28,7 @@ import org.w3c.dom.Text;
 import cei.util.Formatter;
 
 public class ConvertToXML {
-	private static final Logger log = LoggerFactory.getLogger("--- Converting XML ---");
+	private static final Logger log = LoggerFactory.getLogger("--- Converting Xml ---");
 	private static final String ROOT_TAG_NAME = "cei";
 
 	private static volatile ConvertToXML instance = null;
