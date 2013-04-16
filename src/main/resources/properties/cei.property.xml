@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<!-- Base -->
+	<entry key="base.charset">utf-8</entry>
+
+	<!-- Database Account -->
+	<entry key="database.driver">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="database.url">jdbc:oracle:thin:@cheoeumin.com:1521:XE</entry>
+	<entry key="database.username">MUDYO</entry>
+	<entry key="database.password">MUDYO</entry>
+
+	<entry key="file.storage.path">/tmp/storage/upload</entry>
+</properties>

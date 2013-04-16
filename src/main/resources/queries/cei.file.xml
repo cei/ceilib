@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="cei.file">
+	<resultMap id="file-map" class="cei.file.File">
+		<result property="seq"			column="SEQ" />
+		<result property="path"			column="PATH" />
+		<result property="originalName" column="ORGNM" />
+		<result property="saveName"		column="SAVNM" />
+		<result property="mime"			column="MIME" />
+		<result property="size"			column="LEN" />
+		<result property="access"		column="ACC" />
+		<result property="delete"		column="DEL" />
+	</resultMap>
+
+	<insert id="save">
+		<selectKey keyProperty="seq" resultClass="int">SELECT SQ_SYSFD.NEXTVAL FROM DUAL</selectKey>
+
+		INSERT INTO SYSFD (SEQ, ORGNM, SAVNM, PATH, MIME, LEN)
+		VALUES (#seq#,
+				#originalName#,
+				#saveName#,
+				#path#,
+				#mime#,
+				#size#)
+	</insert>
+	<select id="bySeq" resultMap="file-map">
+		SELECT	SEQ,
+				ORGNM,
+				SAVNM,
+				PATH,
+				MIME,
+				LEN,
+				ACC,
+				DEL
+		FROM	SYSFD
+		WHERE	SEQ = #seq#
+	</select>
+	<update id="garbage">
+		UPDATE	SYSFD SET
+				DEL = 'Y'
+		FROM	SEQ = #seq#
+	</update>
+	<update id="recycle">
+		UPDATE	SYSFD SET
+				DEL = 'N'
+		FROM	SEQ = #seq#
+	</update>
+	<delete id="remove">
+		DELETE	FROM SYSFD
+		WHERE	SEQ = #seq#
+	</delete>
+	<update id="access">
+		UPDATE	SYSFD SET
+				ACC = ACC + 1
+		WHERE	SEQ = #seq#
+	</update>
+</sqlMap>
