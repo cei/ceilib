@@ -1,9 +1,6 @@
 package cei.spring.config;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,19 +17,21 @@ public class PropertyConfiguration {
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer placeholder() throws IOException {
 		PropertySourcesPlaceholderConfigurer pspc = new PropertySourcesPlaceholderConfigurer();
-
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
-		List<Resource> resourceList = new ArrayList<Resource>();
-		resourceList.add(ctx.getResource("classpath:cei.property.xml"));
+
+		Resource[] resources = null;
 
 		try {
-			resourceList.addAll(Arrays.asList(ctx.getResources("classpath:properties/**/*")));
+			resources = ctx.getResources("classpath:properties/**/*.xml");
+
+			for ( Resource r : resources ) {
+				log.info( "loading: {}", r.getFilename() );
+			}
+
+			pspc.setLocations(resources);
 		}
 		catch(IOException ioe) {
 			log.info("No have property");
-		}
-		finally {
-			pspc.setLocations(resourceList.toArray(new Resource[resourceList.size()]));
 		}
 
 		return pspc;

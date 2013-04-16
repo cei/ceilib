@@ -1,7 +1,7 @@
-package cei.base;
+package cei.base.domains;
 
 public class BaseUser {
-	public static final String SESSION_NAME = "__user__";
+	public static final String SESSION_NAME = "_user_";
 
 	private String id;
 	private String password;

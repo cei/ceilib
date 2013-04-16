@@ -14,29 +14,18 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class DataSourceConfiguration {
 
-	@Value("${cei.development:false}")
-	String developement;
+	@Value( "${database.driver}" )		String driver;
+	@Value( "${database.url}" )			String url;
+	@Value( "${database.username}" )	String username;
+	@Value( "${database.password}" )	String password;
 
-	
-	@Value("${database.driver}")		String driver;
-	@Value("${database.opr.url}")		String url;
-	@Value("${database.opr.username}")	String username;
-	@Value("${database.opr.password}")	String password;
-	@Value("${database.test.url}")		String testUrl;
-	@Value("${database.test.username}")	String testUsername;
-	@Value("${database.test.password}")	String testPassword;
-
-	@Bean(destroyMethod = "close")
+	@Bean( destroyMethod = "close" )
 	public DataSource dataSource() {
-
-		boolean isDevelopement = Boolean.valueOf(developement);
-		
 		BasicDataSource ds = new BasicDataSource();
-		ds.setDriverClassName(driver);
-		ds.setUrl(isDevelopement ? testUrl : url);
-		ds.setUsername(isDevelopement ? testUsername : username);
-		ds.setPassword(isDevelopement ? testPassword : password);
-		
+		ds.setDriverClassName( driver );
+		ds.setUrl( url );
+		ds.setUsername( username );
+		ds.setPassword( password );
 		return ds;
 	}
 

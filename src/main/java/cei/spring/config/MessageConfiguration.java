@@ -1,8 +1,6 @@
 package cei.spring.config;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,27 +15,24 @@ import cei.support.spring.message.MessageSupport;
 public class MessageConfiguration {
 	private static final Logger log = LoggerFactory.getLogger("--- Message Configuration ---");
 
-	private static final String messagesPath = "/messages/**/*";
-
 	@Bean
 	public MessageSupport messageSource() {
 		MessageSupport messageSource = new MessageSupport();
-
-		List<String> messages = new ArrayList<String>();
-		messages.add("classpath:message.cei");
-
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
-		Resource[] resources = null;
-		
-		try {
-			resources = ctx.getResources("classpath:" + messagesPath);
 
-			for(Resource res : resources)
-				messages.add(res.getURI().toString().replace(".xml", ""));
-			
+		Resource[] resources = null;
+
+		try {
+			resources = ctx.getResources( "classpath:messages/**/*" );
+
+			String[] messages = new String[resources.length];
+			for ( int i = 0; i < resources.length; i++ ) {
+				messages[i] = resources[i].getURI().toString().replace(".xml", "");
+				log.info( "loading: {}", messages[i] );
+			}
+
 			messageSource.setFallbackToSystemLocale(true);
-			messageSource.setBasenames(messages.toArray(new String[messages.size()]));
-			
+			messageSource.setBasenames(messages);
 		}
 		catch(IOException ioe) {
 			log.info("No have messages");

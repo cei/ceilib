@@ -15,5 +15,5 @@
 	<typeHandler javaType="java.lang.String" jdbcType="CLOB" callback="org.springframework.orm.ibatis.support.ClobStringTypeHandler" />
 	<typeHandler javaType="boolean" callback="cei.support.ibatis.type.YesNoBoolTypeHandlerCallback" />
 	
-	<sqlMap resource="query" />
+	<sqlMap resource="queries/query" />
 </sqlMapConfig>
