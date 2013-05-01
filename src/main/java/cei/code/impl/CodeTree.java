@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import cei.code.Code;
 import cei.code.ITree;
-import cei.code.domains.Code;
 
-@Service( "cei.tree" )
-public class TreeImpl extends CodeManagerImpl implements ITree {
+@Service( "cei-tree" )
+public class CodeTree extends CodeManager implements ITree {
 
 	public List<Code> getTree( String group, String code ) {
 		return getTree( group, code, 0, true );

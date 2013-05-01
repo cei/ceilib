@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import cei.code.Code;
 import cei.code.ICode;
 import cei.code.dao.CodeDao;
-import cei.code.domains.Code;
 
-public class CodeManagerImpl {
+public class CodeManager {
 
-	@Resource( name = "cei.code.dao" )
+	@Resource( name = "cei-code-dao" )
 	protected CodeDao dao;
 
 	public void save( Code code ) {

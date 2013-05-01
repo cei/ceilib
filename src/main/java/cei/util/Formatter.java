@@ -221,10 +221,10 @@ public abstract class Formatter {
 					double size = (parseValue > 0) ? parseValue / 1024 : 0;
 	
 					if(size < 10) return size + ONLY_BYTES;
-					else if(size < 1000) return size + KILO_BYTES; 
+					else if(size < 1024) return size + KILO_BYTES; 
 					else {
 						df.applyPattern("0.00");
-						return df.format(size / 1000) + MEGA_BYTES; 
+						return df.format(size / 1024) + MEGA_BYTES; 
 					}
 				}
 				catch(Exception e) {

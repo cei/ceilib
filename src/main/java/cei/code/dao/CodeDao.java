@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import cei.code.domains.Code;
+import cei.code.Code;
 import cei.support.spring.repository.ibatis.DaoSupport;
 
-@Repository( "cei.code.dao" )
+@Repository("cei-code-dao")
 public class CodeDao extends DaoSupport {
 
 	public void save( Code param ) {

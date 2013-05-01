@@ -1,12 +1,12 @@
-package cei.code.domains;
+package cei.code;
 
 public class Code {
 	private String group;
 	private String code;
 	private String parent;
 	private String value;
-	private int level;
-	private int order;
+	private int level = 0;
+	private int order = 0;
 	private boolean use = true;
 	private String description;
 	private String annex;

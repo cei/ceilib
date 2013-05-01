@@ -2,9 +2,7 @@ package cei.base;
 
 import java.util.Comparator;
 
-import cei.base.BaseMap;
-
-public class BaseMapCompare implements Comparator<BaseMap> {
+public class BaseMapCompare<T> implements Comparator<BaseMap<T>> {
 
 	private String name;
 	private boolean asc = true;
@@ -13,7 +11,7 @@ public class BaseMapCompare implements Comparator<BaseMap> {
 		this.name = name;
 	}
 
-	public int compare(BaseMap o1, BaseMap o2) {
+	public int compare(BaseMap<T> o1, BaseMap<T> o2) {
 		if(asc) {
 			return o1.getString(name).compareTo(o2.getString(name));
 		} else {

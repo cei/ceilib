@@ -2,7 +2,6 @@ package cei.code;
 
 import java.util.List;
 
-import cei.code.domains.Code;
 
 public interface ICode {
 	public static final String COMMON_CODE = "COMMON_CODE";

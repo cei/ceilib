@@ -1,5 +1,6 @@
 package cei.base.domains;
 
+
 public class BaseUser {
 	public static final String SESSION_NAME = "_user_";
 

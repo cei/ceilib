@@ -1,13 +1,15 @@
 package cei.spring.config;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import cei.support.spring.message.MessageSupport;
 
@@ -18,23 +20,33 @@ public class MessageConfiguration {
 	@Bean
 	public MessageSupport messageSource() {
 		MessageSupport messageSource = new MessageSupport();
-		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext();
+		ResourcePatternResolver resourceLoader = new PathMatchingResourcePatternResolver();
 
-		Resource[] resources = null;
-
+		log.debug("check #1");
+		
 		try {
-			resources = ctx.getResources( "classpath:messages/**/*" );
+			Resource[] resources = resourceLoader.getResources("classpath*:messages/**/*");
 
-			String[] messages = new String[resources.length];
-			for ( int i = 0; i < resources.length; i++ ) {
-				messages[i] = resources[i].getURI().toString().replace(".xml", "");
-				log.info( "loading: {}", messages[i] );
+			log.debug("resource.length : " + resources.length);
+
+			if(resources.length > 0) {
+				String[] messages = new String[resources.length];
+				int i = 0;
+
+				for (Resource resource : resources) {
+					String url = resource.getURL().toString();
+					
+					if(url.toLowerCase().endsWith(".xml")) {
+						messages[i] = url.replace("\\.xml$", "");
+						log.info("loading: {}", messages[i]);
+					}
+				}
+
+				messageSource.setFallbackToSystemLocale(true);
+				messageSource.setBasenames(messages);
 			}
-
-			messageSource.setFallbackToSystemLocale(true);
-			messageSource.setBasenames(messages);
 		}
-		catch(IOException ioe) {
+		catch(Exception e) {
 			log.info("No have messages");
 		}
 		
